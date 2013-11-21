@@ -2,7 +2,7 @@
 
   var fs = require('fs')
   , timezoneJS = require('./date')
-  , EXCLUDED = new RegExp('Makefile|factory|(\\.+)', 'i');
+  , EXCLUDED = new RegExp('README|Makefile|factory|(\\.+)', 'i');
 
   function parse(args) {
     // Upgrade passed script args to real Array
@@ -48,7 +48,12 @@
       result.zones = _tz.zones;
       result.rules = _tz.rules;
     }
-    console.log(JSON.stringify(result));
+    console.log(JSON.stringify(result, function(key, value) {
+      if (typeof(value) == "number") {
+        return value.toString()
+      }
+      return value
+    }));
   }
 
   module.exports = parse(process.argv);
