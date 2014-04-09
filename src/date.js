@@ -208,7 +208,7 @@
     }
     // If the last string argument doesn't parse as a Date, treat it as tz
     if (typeof args[args.length - 1] === 'string') {
-      valid = Date.parse(args[args.length - 1].replace(/GMT[\+\-]\d+/, '')); 
+      valid = Date.parse(args[args.length - 1].replace(/GMT[\+\-]\d+/, ''));
       if (isNaN(valid) || valid === null) {  // Checking against null is required for compatability with Datejs
         tz = args.pop();
       }
@@ -1026,7 +1026,7 @@
         off = getAdjustedOffset(off, rule[6]);
       }
       var abbr = getAbbreviation(z, rule);
-      return { tzOffset: off, tzAbbr: abbr };
+      return { tzOffset: parseInt(off,10), tzAbbr: abbr };
     };
   };
 }).call(this);
